@@ -32,6 +32,7 @@
 4. 실제 로봇에 연결 테스트 
 ```
 
+
 ### 3. 주요 코드 위치
 ```
 라이다의 경우 압축을 풀면 됩니다  : $ unzip robot_4leg_robot.zip
@@ -40,6 +41,7 @@
 음원에서 나온 각도 pub            : Sound-source-localization-using-TDOA-master/final/main.cpp
 받은 각도를 회전으로              : robot_connection-master/src/my_test_pkg_py/receive_angle.py
 ```
+
 
 ### 4. 빌드 방법
 ```
@@ -57,6 +59,7 @@ $ source install/setup.bash
 $ cd Sound-source-localization-using-TDOA-main
 ```
 
+
 ### 5. 실행 방법
 ```
 1번 터미널 
@@ -71,6 +74,7 @@ $ ros2 run my_test_pkg_py control
 
 예상 출력값
 ```
+
 
 ### 6. 에러 해결책
 ```
