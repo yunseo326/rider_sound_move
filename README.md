@@ -22,6 +22,7 @@
 
 ### 3. 주요 코드 위치
 ```
+라이다의 경우 압축을 풀면 됩니다  : $ unzip robot_4leg_robot.zip
 라이다 데이터 pub                 : ros2_4leg_robot/src/ros2_robot_rider.py
 받은 라이다 데이터를 움직임으로   : robot_connection-master/src/my_test_pkg_py/control.py
 음원에서 나온 각도 pub            : Sound-source-localization-using-TDOA-master/final/main.cpp
