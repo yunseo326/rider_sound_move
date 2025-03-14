@@ -1,1 +1,0 @@
-/home/yunseo/ros2_ws/src/my_test_pkg_py/setup.py
