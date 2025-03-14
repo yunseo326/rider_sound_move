@@ -10,15 +10,24 @@
 ```
 
 ### 1. 노드 정리
+진행 상황
+![Image](https://github.com/user-attachments/assets/12fafb0b-fa62-4a53-b9d9-195f3fb535ec)
 
+목표
+![Image](https://github.com/user-attachments/assets/df0d05a1-aa08-42cd-91e5-5a46bc181e3c)
 
 
 
 ### 2. 미완성인 부분
 ```
-1. 음원 cmake 2개인 문제, python으로 할껀지 cmake2개를 해결해서 할껀지 
-2. 명령어가 너무 많기에 한번에 해주는 launch 파일 같은거 제작
-3. 
+뭔가 더 있을것같은데 중요한 부분만 적었습니다
+
+1. 위의 사진에서 알 수 있듯이 가운데 노드가 빠져있음 
+- 이미 코드는 기상선배가 notion에 올려놓은 상태 아직 코드를 합치지 못함 
+2. 음원 cmakelist 2개여서 어떻게 해야하는지 모르겠음 
+- python으로 할껀지 cmake2개를 해결해서 할껀지 정해서 해경해야함
+3. 명령어가 너무 많기에 한번에 해주는 launch 파일 같은거 제작
+4. 실제 로봇에 연결 테스트 
 ```
 
 ### 3. 주요 코드 위치

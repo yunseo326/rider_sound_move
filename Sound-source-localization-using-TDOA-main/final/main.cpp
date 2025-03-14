@@ -9,7 +9,7 @@
 
 
 // ------------------ros 연결 관련 선언
-//노드 이름 master_order
+//노드 이름 sound_detection
 //토픽 이름 angle
 //토픽 타입 <std_msgs::msg::String>
 #include "rclcpp/rclcpp.hpp"
@@ -19,7 +19,7 @@ class MasterOrder : public rclcpp::Node
 {
 public:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr order_pub_;
-  MasterOrder() : Node("master_order")
+  MasterOrder() : Node("sound_detection")
   {
     auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
     order_pub_ = this->create_publisher<std_msgs::msg::String>(
