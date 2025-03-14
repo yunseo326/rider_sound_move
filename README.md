@@ -61,19 +61,20 @@ $ ros2 run my_test_pkg_py control
 ```
 
 ### 6. 에러 해결책
+```
 1. 환경
 2. ros2 launch rplidar_ros view_rplidar.launch.py 실행시 라이다 rviz 빨간점들이 보이지 않을때 
 3. ros2 run my_test_pkg_py control 실행시 pt의 위치가 잘못 되었다고 나올때
 4. 기타 
+```
 
-
-1. 환경 
+##### 1. 환경 
 ```
 듀얼 부팅으로 ubuntu 설치되어야함 
 anaconda와 같이 기본 python 위치를 바꾸는 프로그램 제거 필요
 ```
 
-2. ros2 launch rplidar_ros view_rplidar.launch.py 실행시 라이다 rviz 빨간점들이 보이지 않을때 
+##### 2. ros2 launch rplidar_ros view_rplidar.launch.py 실행시 라이다 rviz 빨간점들이 보이지 않을때 
 ```
 아래는 ttyUSB0의 읽고 쓸 권한을 부여한다. 
 
@@ -106,7 +107,7 @@ $ sudo usermod -a -G dialout $USER
 권한을 부여하면된다. 이후 bash shell 을 끈 후 다시 키면 된다.
 ```
 
-3. ros2 run my_test_pkg_py control 실행시 pt의 위치가 잘못 되었다고 나올때
+##### 3. ros2 run my_test_pkg_py control 실행시 pt의 위치가 잘못 되었다고 나올때
 ```
 control.py의 146번째 줄의 /home/muwon/sound_and_test 부분을 본인에 맞게 수정
 
