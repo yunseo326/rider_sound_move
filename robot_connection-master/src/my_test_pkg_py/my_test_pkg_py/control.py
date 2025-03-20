@@ -149,8 +149,7 @@ class LidarScan(Node):
         self.order_msg = msg.data
         self.output = self.model(self.order_msg)
         print(self.output)
-
-if __name__=="__main__":
+def main():
     rclpy.init(args=None)
     node = TestMoveBlindNoService()
     minimal_subscriber = MinimalSubscriber()
@@ -184,3 +183,6 @@ if __name__=="__main__":
 
     node.destroy_node()
     rclpy.shutdown()
+
+if __name__ == '__main__' :
+    main()
