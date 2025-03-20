@@ -81,7 +81,8 @@ $ ros2 run my_test_pkg_py control
 1. 환경
 2. ros2 launch rplidar_ros view_rplidar.launch.py 실행시 라이다 rviz 빨간점들이 보이지 않을때 
 3. ros2 run my_test_pkg_py control 실행시 pt의 위치가 잘못 되었다고 나올때
-4. 기타 
+4. main이 없어요 에러
+5. 기타 
 ```
 
 ##### 1. 환경 
@@ -131,7 +132,12 @@ self.model.load_state_dict(torch.load('/home/muwon/sound_and_test/robot_connecti
 ```
 
 
-##### 4. 기타 
+##### 4. 
+```
+코드 문제일 가능성이 높습니다 연락부탁드립니다.
+```
+
+##### 5. 기타 
 ```
 [0.202s] WARNING:colcon.colcon_core.prefix_path.colcon:The path '/home/havi/Downloads/Lider_sound_move-main/robot_connection-master/install' in the environment variable COLCON_PREFIX_PATH doesn't exist
 [0.202s] WARNING:colcon.colcon_core.prefix_path.colcon:The path '/home/havi/lidar_sound_move/robot_connection-master/install' in the environment variable COLCON_PREFIX_PATH doesn't exist
