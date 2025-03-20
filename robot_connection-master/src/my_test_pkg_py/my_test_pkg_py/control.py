@@ -8,6 +8,7 @@ from geometry_msgs.msg import Vector3, Twist
 from nav_msgs.msg import Odometry  # 메시지 타입 변경 가능
 from std_srvs.srv import Empty
 from sensor_msgs.msg import LaserScan  # 메시지 타입 변경 가능
+import numpy as np
 #import reinforcement_model
 import torch
 
@@ -73,10 +74,10 @@ class TestMoveBlindNoService(Node):
         self.pub_twist.publish(Twist()) # zero twist
 
     def Endmode(self):
-        node.pub_action.publish(UInt32(data=0)) # sit
+        self.pub_action.publish(UInt32(data=0)) # sit
         time.sleep(5)
-        node.get_logger().info("Setting control mode=180")
-        node.pub_control_mode.publish(UInt32(data=180))
+        self.get_logger().info("Setting control mode=180")
+        self.pub_control_mode.publish(UInt32(data=180))
 
 
 class MinimalSubscriber(Node):
@@ -116,8 +117,8 @@ class MinimalSubscriber(Node):
 import torch
 import torch.nn.functional as F
 
-state_size = 96
-action_size = 3
+state_size = 93
+action_size = 5
 
 class ActorCritic(torch.nn.Module):
     def __init__(self, **kwargs):
@@ -136,48 +137,67 @@ class ActorCritic(torch.nn.Module):
 class LidarScan(Node):
     def __init__(self):
         super().__init__('sub_lidar')
-        self.sub_order = self.create_subscription(LaserScan, '/sensor_msgs/msg/LaserScan', self.cal_action, 10)
-        
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = ActorCritic().to(device)
-        self.model.load_state_dict(torch.load('/pt/4action_4_mode.pt'))
+        self.subscription = self.create_subscription(Odometry,  '/odom',  self.Odom,  10)
+        self.sub_order = self.create_subscription(LaserScan, '/filtered_scan', self.Lidar, 10)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = ActorCritic().to(self.device)
+        # 이 파일 위치를 본인에 맞게 수정해야합니다
+        self.model.load_state_dict(torch.load('/home/muwon/sound_and_test/robot_connection-master/src/my_test_pkg_py/my_test_pkg_py/pt/4action_4_model.pt'))
         self.model.eval()
+        self.Odom_msg = np.array([0,0,0])
 
         self.output = 0
 
-    def cal_action(self, msg):
-        self.order_msg = msg.data
-        self.output = self.model(self.order_msg)
-        print(self.output)
+    def Lidar(self, msg):
+        self.lidar_msg = msg
+        # print(self.lidar_msg.ranges)
+        state = np.concatenate((self.lidar_msg.ranges, self.Odom_msg))
+        state[state == np.inf] = 15
+        state = np.float32(state)
+        self.output, _ = self.model(torch.FloatTensor(state).to(self.device))
+        self.action = torch.multinomial(self.output,1).cpu().numpy()[0]
+
+        print(self.action)
+
+
+        # print(state) 
+        # print(len(state))
+        # print("\n")
+
+    def Odom(self, msg):
+        position = [msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z]
+        self.Odom_msg = np.array(position)
+
 def main():
     rclpy.init(args=None)
     node = TestMoveBlindNoService()
     minimal_subscriber = MinimalSubscriber()
     lidar = LidarScan()
     
-    output = rclpy.spin(lidar)
     node.Initialize()
     print("forward : 1 \n backward : 2 \n right : 3 \n left : 6 \n end : 7 \n ")
     
-    In = 0
+    lidar.action = 0
     while True:
-        if lidar.output == "hihi":
-            print(output)
-        
-        if In == "1":
+        output = rclpy.spin_once(lidar)
+        if lidar.action == 1:
+            print("forward")
             node.Forward()
             rclpy.spin_once(minimal_subscriber)
-        elif In == "2":
+        elif lidar.action == 2:
+            print("behind")
             node.Backward()
             rclpy.spin_once(minimal_subscriber)
-        elif In == "3":
+        elif lidar.action == 3:
+            print("right")
             node.RightSide()
             rclpy.spin_once(minimal_subscriber)
-        elif In == "4":
+        elif lidar.action == 4:
+            print("left")
             node.LeftSide()
             rclpy.spin_once(minimal_subscriber)
         
-        elif In =="7":
+        elif lidar.action == 5:
             node.Endmode()
             break
 
