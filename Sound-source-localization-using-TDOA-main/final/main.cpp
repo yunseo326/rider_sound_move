@@ -7,37 +7,6 @@
 #include <thread>
 #include <chrono>
 
-
-// ------------------ros 연결 관련 선언
-//노드 이름 sound_detection
-//토픽 이름 angle
-//토픽 타입 <std_msgs::msg::String>
-#include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
-
-class MasterOrder : public rclcpp::Node
-{
-public:
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr order_pub_;
-  MasterOrder() : Node("sound_detection")
-  {
-    auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
-    order_pub_ = this->create_publisher<std_msgs::msg::String>(
-      "angle",
-      qos_profile
-    );
-  }
-
-  void publish_order_msg(std::string order)
-  {
-    auto msg = std_msgs::msg::String();
-    msg.data = order;
-    RCLCPP_INFO(this->get_logger(), "Order publish");
-    order_pub_->publish(msg);
-  }
-};
-// ------------------ros 연결 
-
 using namespace CalDegree;
 #define SAMPLE_RATE 44100
 #define FRAMES_PER_BUFFER 44100*2
@@ -104,11 +73,6 @@ void captureAudio4() {
     }
 
 int main(){
-    // ros node 시작
-    rclcpp::init(argc, argv);
-    auto master_order = std::make_shared<MasterOrder>();
-    std::string order;
-
 
     PaError err = Pa_Initialize();
     if (err != paNoError) {
@@ -271,7 +235,6 @@ int main(){
                 std::pair<double, double> best_pair = _select_final_direction({result.angle_1, result.angle_2, result.angle_3, result.angle_4});
                 cout << "최종 방향: " << (best_pair.first + best_pair.second)/2 << " 도" << endl;
                 cout << endl;
-                master_order->publish_order_msg(order);
             
         }
         if (PRINT) {
@@ -299,8 +262,6 @@ int main(){
     if (err != paNoError) {
         std::cerr << "네 번째 스트림 중지 실패: " << Pa_GetErrorText(err) << std::endl;
     }
-    // ros node 종료
-    rclcpp::shutdown();
     Pa_Terminate();
     return 0;
 }
