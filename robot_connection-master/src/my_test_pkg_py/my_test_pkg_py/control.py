@@ -142,7 +142,7 @@ class LidarScan(Node):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = ActorCritic().to(self.device)
         # 이 파일 위치를 본인에 맞게 수정해야합니다
-        self.model.load_state_dict(torch.load('/home/muwon/sound_and_test/robot_connection-master/src/my_test_pkg_py/my_test_pkg_py/pt/4action_4_model.pt'))
+        self.model.load_state_dict(torch.load('/home/muwon/Lider_sound_move-master/robot_connection-master/src/my_test_pkg_py/my_test_pkg_py/pt/4action_4_model.pt'))
         self.model.eval()
         self.Odom_msg = np.array([0,0,0])
 
