@@ -55,8 +55,12 @@ $ cd robot_4leg_robot
 $ colcon build
 $ source install/setup.bash
 
-아직 미완
+오디오 - 사전 requirement 설치해야합니다 위치 : Sound-source-localization-using-TDOA-master/requirement.txt
 $ cd Sound-source-localization-using-TDOA-main
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
 ```
 
 
