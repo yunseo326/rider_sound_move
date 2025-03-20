@@ -129,3 +129,16 @@ control.py의 146번째 줄의 /home/muwon/sound_and_test 부분을 본인에 �
 
 self.model.load_state_dict(torch.load('/home/muwon/sound_and_test/robot_connection-master/src/my_test_pkg_py/my_test_pkg_py/pt/4action_4_model.pt'))
 ```
+
+
+##### 4. 기타 
+```
+[0.202s] WARNING:colcon.colcon_core.prefix_path.colcon:The path '/home/havi/Downloads/Lider_sound_move-main/robot_connection-master/install' in the environment variable COLCON_PREFIX_PATH doesn't exist
+[0.202s] WARNING:colcon.colcon_core.prefix_path.colcon:The path '/home/havi/lidar_sound_move/robot_connection-master/install' in the environment variable COLCON_PREFIX_PATH doesn't exist
+[0.202s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/havi/Downloads/Lider_sound_move-main/robot_connection-master/install/my_test_pkg_py' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.202s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/havi/lidar_sound_move/robot_connection-master/install/my_test_pkg_py' in the environment variable AMENT_PREFIX_PATH doesn't exist
+
+위 4개중 몇개가 발생했다면 아래 명령어 실행후 다시 colcon build 하기
+$ unset COLCON_PREFIX_PATH
+$ unset AMENT_PREFIX_PATH
+```
