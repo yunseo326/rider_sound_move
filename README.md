@@ -56,7 +56,7 @@ $ colcon build
 $ source install/setup.bash
 
 오디오 - 사전 requirement 설치해야합니다 위치 : Sound-source-localization-using-TDOA-master/requirement.txt
-$ cd Sound-source-localization-using-TDOA-main
+$ cd Sound-source-localization-using-TDOA-main/final
 $ mkdir build
 $ cd build
 $ cmake ..
