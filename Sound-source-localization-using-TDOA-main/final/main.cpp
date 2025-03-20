@@ -235,7 +235,8 @@ int main(){
                 std::pair<double, double> best_pair = _select_final_direction({result.angle_1, result.angle_2, result.angle_3, result.angle_4});
                 cout << "최종 방향: " << (best_pair.first + best_pair.second)/2 << " 도" << endl;
                 cout << endl;
-            
+                return (best_pair.first + best_pair.second)/2;
+
         }
         if (PRINT) {
             plt::pause(0.01);  // 잠시 대기 (그래프 갱신을 위한 시간 조정)
