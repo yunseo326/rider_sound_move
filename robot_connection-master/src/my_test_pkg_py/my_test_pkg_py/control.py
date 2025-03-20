@@ -55,7 +55,6 @@ class TestMoveBlindNoService(Node):
     def Backward(self):
         self.get_logger().info("Commanding Backward twist")
         for i in range(Iteration):
-
             self.pub_twist.publish(Twist(linear=Vector3(x=-Speed_X)))
             time.sleep(0.01) # do this instead of sleep(2) to avoid timeout
 
@@ -82,22 +81,16 @@ class TestMoveBlindNoService(Node):
 
     def TurnRight(self, angular):
         self.get_logger().info("Commanding TurnRight twist")
-        rclpy.spin_once(self.minimal_subscriber)
-        initial_angular = self.minimal_subscriber.angular
-        changed_angular = angular
-        while abs(changed_angular - initial_angular - angular) >= 0.05:
-            rclpy.spin_once(self.minimal_subscriber)
-            changed_angular = self.minimal_subscriber.angular
-            self.pub_twist.publish(Twist(angular=Vector3(z=(changed_angular-initial_angular-angular))))
+        for i in range(angular*100):
+            self.pub_twist.publish(Twist(angular=Vector3(z=Speed_Angular)))
             time.sleep(0.01) # do this instead of sleep(2) to avoid timeout
-            print((changed_angular-initial_angular) * 10)
 
         self.get_logger().info("Setting action=0")
         self.pub_twist.publish(Twist()) # zero twist
 
     def TurnLeft(self, angular):
         self.get_logger().info("Commanding TurnLeft twist")
-        for i in range(angular):
+        for i in range(angular*100):
             self.pub_twist.publish(Twist(angular=Vector3(z=-Speed_Angular)))
             time.sleep(0.01) # do this instead of sleep(2) to avoid timeout
 
@@ -153,20 +146,18 @@ def main():
     minimal_subscriber = MinimalSubscriber()
 
     node.Initialize()
+    
     while True:
+        degree is None
         degree = Audio()
+        if degree is not None:
+            if  0 < degree < 180 :
+                step = degree // 30
+                node.TurnLeft(step)
 
-        if  0 < degree < 180 :
-            step = degree // 30
-            while step >=0:
-                step = step - 1
-                node.TurnLeft()
-
-        elif degree < 360 :
-            step = (360 - degree) // 30
-            while step >=0:
-                step = step - 1
-                node.TurnRight()
+            elif degree < 360 :
+                step = (360 - degree) // 30
+                node.TurnRight(step)
 
         else :
             print("error")
