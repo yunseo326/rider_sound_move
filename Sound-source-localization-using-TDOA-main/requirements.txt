@@ -3,6 +3,7 @@ sudo apt upgrade
 sudo apt update
 sudo apt install cmake 
 
+2번은 설치 안하셔도 됩니다
 2. matplot
 https://github.com/lava/matplotlib-cpp
 change CMakeLists.txt
