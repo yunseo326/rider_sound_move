@@ -16,8 +16,6 @@ using namespace CalDegree;
 #define DEVICE_ID2 6
 #define DEVICE_ID3 7
 #define DEVICE_ID4 8
-// if you change FALSE to TRUE, you can see the graph. but it makes a little delay
-#define PLT FALSE
 
 float inputData1[FRAMES_PER_BUFFER];
 float inputData2[FRAMES_PER_BUFFER];
@@ -170,9 +168,7 @@ int main(){
     }
 
     std::cout << "오디오 입력을 시작합니다. 종료하려면 Ctrl+C를 누르세요..." << std::endl;
-    if (PRINT) {
-        plt::ion();
-    }
+    
     while (true) {
 
         // 오디오 입력을 받을 스레드 실행
@@ -186,37 +182,7 @@ int main(){
         captureThread2.join();
         captureThread3.join();
         captureThread4.join();
-        if (PRINT) {
-        plt::clf();  // 그래프 초기화
-
-        // 첫 번째 마이크의 오디오 데이터를 그래프에 그리기
-        plt::subplot(4, 1, 1);
-        plt::plot(std::vector<float>(inputData1, inputData1 + FRAMES_PER_BUFFER));
-        plt::title("Input 1");
-        plt::xlim(0, FRAMES_PER_BUFFER);   // x축 범위 설정
-        plt::ylim(-0.5, 0.5);              // y축 범위 설정
-
-        // 두 번째 마이크의 오디오 데이터를 그래프에 그리기
-        plt::subplot(4, 1, 2);
-        plt::plot(std::vector<float>(inputData2, inputData2 + FRAMES_PER_BUFFER));
-        plt::title("Input 2");
-        plt::xlim(0, FRAMES_PER_BUFFER);   // x축 범위 설정
-        plt::ylim(-0.5, 0.5);              // y축 범위 설정
-
-        // 세 번째 마이크의 오디오 데이터를 그래프에 그리기
-        plt::subplot(4, 1, 3);
-        plt::plot(std::vector<float>(inputData3, inputData3 + FRAMES_PER_BUFFER));
-        plt::title("Input 3");
-        plt::xlim(0, FRAMES_PER_BUFFER);   // x축 범위 설정
-        plt::ylim(-0.5, 0.5);              // y축 범위 설정
- 
-        // 네 번째 마이크의 오디오 데이터를 그래프에 그리기
-        plt::subplot(4, 1, 4);
-        plt::plot(std::vector<float>(inputData4, inputData4 + FRAMES_PER_BUFFER));
-        plt::title("Input 4");
-        plt::xlim(0, FRAMES_PER_BUFFER);   // x축 범위 설정
-        plt::ylim(-0.5, 0.5);              // y축 범위 설정
-        }
+        
 
         
         float* maxPtr1 = std::max_element(inputData1, inputData1+FRAMES_PER_BUFFER);
@@ -238,9 +204,7 @@ int main(){
                 return (best_pair.first + best_pair.second)/2;
 
         }
-        if (PRINT) {
-            plt::pause(0.01);  // 잠시 대기 (그래프 갱신을 위한 시간 조정)
-        }
+        
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     // 스트림 종료

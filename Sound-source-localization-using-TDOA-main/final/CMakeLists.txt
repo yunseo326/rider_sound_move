@@ -30,16 +30,16 @@ link_directories(${PORTAUDIO_LIBRARY})
 
 
 # 실행 파일 생성
-add_executable(caldegree_main Test_Degree.cpp ${SOURCES})
+# add_executable(caldegree_main Test_Degree.cpp ${SOURCES})
 add_executable(main main.cpp ${SOURCES})
-add_executable(device_check device_check.cpp)
+# add_executable(device_check device_check.cpp)
 
 
 # 헤더 파일 포함 디렉토리
 include_directories(${PROJECT_SOURCE_DIR})
 
 # FFTW 라이브러리 연결
-target_link_libraries(caldegree_main PRIVATE fftw3)
+# target_link_libraries(caldegree_main PRIVATE fftw3)
 target_link_libraries(main PRIVATE fftw3)
 
 
