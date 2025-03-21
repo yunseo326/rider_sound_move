@@ -69,6 +69,9 @@ cyclonedds 연결방법
 
 ### 5. 실행 방법
 ```
+만약 setup.py 혹은 cmakelist를 수정하였다면 빌드 과정 다시 진행
+실행코드만 수정하였다면 source install/setup.bash 만 수행
+
 1번 터미널 
 $ ros2 launch rplidar_ros view_rplidar.launch.py
 
