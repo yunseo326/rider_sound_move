@@ -35,28 +35,27 @@
 
 ### 3. 주요 코드 위치
 ```
-라이다의 경우 압축을 풀면 됩니다  : $ unzip robot_4leg_robot.zip
+라이다의 경우 압축을 풀면 됩니다  : $ unzip ros2_4leg_robot.zip
 라이다 데이터 pub                 : ros2_4leg_robot/src/ros2_robot_rider.py
-받은 라이다 데이터를 움직임으로   : robot_connection-master/src/my_test_pkg_py/control.py
-음원에서 나온 각도 pub            : Sound-source-localization-using-TDOA-master/final/main.cpp
-받은 각도를 회전으로              : robot_connection-master/src/my_test_pkg_py/receive_angle.py
+받은 라이다 데이터를 움직임으로   : robot/src/my_test_pkg_py/control.py
+음원에서 나온 각도를 움직임으로   : Sound/final/main.cpp
 ```
 
 
 ### 4. 빌드 방법
 ```
 contorl 코드
-$ cd robot_connection-master
+$ cd robot
 $ colcon build --symlink-install --packages-select my_test_pkg_py
 $ source install/setup.bash
 
 라이다 
-$ cd robot_4leg_robot
+$ cd ros2_4leg_robot
 $ colcon build
 $ source install/setup.bash
 
-오디오 - 사전 requirement 설치해야합니다 위치 : Sound-source-localization-using-TDOA-master/requirement.txt
-$ cd Sound-source-localization-using-TDOA-main/final
+오디오 - 사전 requirement 설치해야합니다 위치 : Sound/requirement.txt
+$ cd Sound
 $ mkdir build
 $ cd build
 $ cmake ..
