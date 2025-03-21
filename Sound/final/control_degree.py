@@ -6,7 +6,7 @@ from geometry_msgs.msg import Vector3, Twist
 from nav_msgs.msg import Odometry 
 from std_srvs.srv import Empty 
 
-EXE_PATH = "/home/muwon/sound_and_test/Sound/final/build/main"
+EXE_PATH = "/home/muwon/Lider_sound_move-main/Sound/final/build/main"
 
 
 def Audio():

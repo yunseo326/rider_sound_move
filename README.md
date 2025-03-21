@@ -89,7 +89,7 @@ $ ros2 run my_test_pkg_py control
 ```
 1. 환경
 2. ros2 launch rplidar_ros view_rplidar.launch.py 실행시 라이다 rviz 빨간점들이 보이지 않을때 
-3. ros2 run my_test_pkg_py control 실행시 pt의 위치가 잘못 되었다고 나올때
+3. 주소 위치 에러 
 4. main이 없어요 에러
 5. 기타 
 ```
@@ -135,9 +135,13 @@ $ sudo usermod -a -G dialout $USER
 
 ##### 3. ros2 run my_test_pkg_py control 실행시 pt의 위치가 잘못 되었다고 나올때
 ```
-control.py의 146번째 줄의 /home/muwon/sound_and_test 부분을 본인에 맞게 수정
+robot/src/my_test_pkg_py/control.py의 146번째 줄의 /home/muwon/sound_and_test 부분을 본인에 맞게 수정
 
 self.model.load_state_dict(torch.load('/home/muwon/sound_and_test/robot_connection-master/src/my_test_pkg_py/my_test_pkg_py/pt/4action_4_model.pt'))
+
+Sound/final/control_degree.py의 부분 수정
+EXE_PATH = "/home/muwon/Lider_sound_move-main/Sound/final/build/main"
+
 ```
 
 
