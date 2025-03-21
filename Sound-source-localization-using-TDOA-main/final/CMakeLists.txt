@@ -32,7 +32,7 @@ link_directories(${PORTAUDIO_LIBRARY})
 # 실행 파일 생성
 # add_executable(caldegree_main Test_Degree.cpp ${SOURCES})
 add_executable(main main.cpp ${SOURCES})
-# add_executable(device_check device_check.cpp)
+add_executable(device_check device_check.cpp)
 
 
 # 헤더 파일 포함 디렉토리
@@ -45,6 +45,7 @@ target_link_libraries(main PRIVATE fftw3)
 
 set(PORTAUDIO_LIBRARY /usr/lib/x86_64-linux-gnu/libportaudio.so)
 target_link_libraries(main PRIVATE ${PORTAUDIO_LIBRARY})
+target_link_libraries(device_check PRIVATE ${PORTAUDIO_LIBRARY})
 
 
 find_package(Threads REQUIRED)

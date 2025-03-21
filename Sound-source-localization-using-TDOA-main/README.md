@@ -15,6 +15,8 @@ cd build
 cmake ..
 make
 ./main
+
+에러가 뜬다면 ./device_check 실행해서 오디오 번호 맞춰주기 usb에 맞춰주면 됨
 ```
  
 ### Project File List
