@@ -76,7 +76,7 @@ cyclonedds 연결방법
 $ ros2 launch rplidar_ros view_rplidar.launch.py
 
 2번 터미널 
-$ cd ros2_4leg_robot
+$ cd ros2_4leg_robot/src
 $ python3 ros2_robot_ridar.py
 
 contorl 파일 실행 
