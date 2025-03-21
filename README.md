@@ -71,6 +71,7 @@ cyclonedds 연결방법
 만약 setup.py 혹은 cmakelist를 수정하였다면 빌드 과정 다시 진행
 실행코드만 수정하였다면 source install/setup.bash 만 수행
 
+라이다 실행 
 1번 터미널 
 $ ros2 launch rplidar_ros view_rplidar.launch.py
 
@@ -78,10 +79,14 @@ $ ros2 launch rplidar_ros view_rplidar.launch.py
 $ cd ros2_4leg_robot
 $ python3 ros2_robot_ridar.py
 
+contorl 파일 실행 
 3번 터미널
+$ cd robot
 $ ros2 run my_test_pkg_py control
 
-예상 출력값
+sound 파일 실행 
+$ cd Sound/final
+$ python control_degree.py
 ```
 
 
